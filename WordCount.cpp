@@ -21,7 +21,7 @@ int WordCount::getTotalWords() const {
 	int numWords = 0;
 	vector<pair<string, int>> wordVector;
 
-	for (int i = 0; i < CAPACITY; i++){
+	for (size_t i = 0; i < CAPACITY; i++){
 		wordVector = table[i];
 
 		for (auto wordPair: wordVector){
@@ -37,7 +37,7 @@ int WordCount::getNumUniqueWords() const {
 	int numWords = 0;
 	vector<pair<string, int>> wordVector;
 
-	for (int i = 0; i < CAPACITY; i++){
+	for (size_t i = 0; i < CAPACITY; i++){
 		wordVector = table[i];
 		//cout << wordVector.size() << endl;
 		numWords+=(wordVector.size());
@@ -51,7 +51,7 @@ int WordCount::getWordCount(const std::string & word) const {
 	int wordIndex = hash(validWord);
 	vector<pair<string, int>> wordVector = table[wordIndex];
 	
-	for (int i = 0; i < wordVector.size(); i++){
+	for (size_t i = 0; i < wordVector.size(); i++){
 		if (wordVector.at(i).first == validWord){
 			return table[wordIndex].at(i).second;
 		}
@@ -75,7 +75,7 @@ int WordCount::incrWordCount(const std::string & word) {
 	// if (wordVector.size() == 0){
 		
 	// }
-	for (int i = 0; i < wordVector.size(); i++){
+	for (size_t i = 0; i < wordVector.size(); i++){
 		if (wordVector.at(i).first == validWord){
 			wordInTable = true;
 			table[wordIndex].at(i).second++;
@@ -106,7 +106,7 @@ int WordCount::decrWordCount(const std::string & word) {
 	
 	//bool wordInTable = false;
 	//cout << "size: " << wordVector.size() << endl;
-	for (int i = 0; i < wordVector.size(); i++){
+	for (size_t i = 0; i < wordVector.size(); i++){
 		//cout << "Hello" << endl;
 		if (wordVector.at(i).first == validWord){
 			//wordInTable = true;
@@ -143,7 +143,7 @@ std::string WordCount::makeValidWord(const std::string & word) {
 	int validStartingIndex = 0;
 	int validEndingIndex = 0;
 
-	for (int i = 0; i < word.size(); i++){
+	for (size_t i = 0; i < word.size(); i++){
 		if (isalpha(word.at(i))){
             isAlpha = true;
 			validStartingIndex = i;
