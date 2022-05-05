@@ -66,32 +66,35 @@ int WordCount::incrWordCount(const std::string & word) {
 	//if one pair already includes the keyword, then add one to the 'amount'
 	//if the keyword doesn't exist, then append a new pair
 	string validWord = makeValidWord(word);
-	int wordIndex = hash(validWord);
-	//cout << "wordIndex:" << wordIndex << endl;
-	vector<pair<string, int>> wordVector = table[wordIndex];
-	
-	bool wordInTable = false;
-	//cout << wordVector.size() << endl;
-	// if (wordVector.size() == 0){
-		
-	// }
-	for (size_t i = 0; i < wordVector.size(); i++){
-		if (wordVector.at(i).first == validWord){
-			wordInTable = true;
-			table[wordIndex].at(i).second++;
-			return table[wordIndex].at(i).second;
-			// wordVector.at(i).second++;
-			// return wordVector.at(i).second;
-		}
-	}
-	if (!wordInTable){
-		//cout << "INSIDE IF" << endl;
-		pair<string, int> p(validWord, 1);
-		table[wordIndex].push_back(p);
-		//cout << wordVector.size() << endl;
-	}
 
-	return 1;
+	if (validWord != ""){
+		int wordIndex = hash(validWord);
+		//cout << "wordIndex:" << wordIndex << endl;
+		vector<pair<string, int>> wordVector = table[wordIndex];
+		
+		bool wordInTable = false;
+		//cout << wordVector.size() << endl;
+		// if (wordVector.size() == 0){
+			
+		// }
+		for (size_t i = 0; i < wordVector.size(); i++){
+			if (wordVector.at(i).first == validWord){
+				wordInTable = true;
+				table[wordIndex].at(i).second++;
+				return table[wordIndex].at(i).second;
+				// wordVector.at(i).second++;
+				// return wordVector.at(i).second;
+			}
+		}
+		if (!wordInTable){
+			//cout << "INSIDE IF" << endl;
+			pair<string, int> p(validWord, 1);
+			table[wordIndex].push_back(p);
+			//cout << wordVector.size() << endl;
+		}
+		return 1;
+	}
+	return 0;
 }
 
 int WordCount::decrWordCount(const std::string & word) {

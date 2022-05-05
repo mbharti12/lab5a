@@ -44,18 +44,24 @@ int main(){
     validWord = makeValidWord("'''''''NICE!!");
     ASSERT_EQUALS("nice", validWord);
 
+    //EMPTY STRINGS MIGHT BE INVALID WORDS
+    validWord = makeValidWord("--$$--");
+    ASSERT_EQUALS("", validWord);
+
     cout << endl;
 
     WordCount w;
     WordCount w2;
     WordCount w3;
     WordCount w4;
+    WordCount w5;
 
     //create an array/list of random strings (then add them to the wordcount object)
     vector<string> wordList = {"foo", "GOO", "CS", "cs", "lAb", "computER-sCieNce", "relatively-long-string-but-not-that-long", "computer-science", "CS", "ucsb", "North-Hall", "library", "compiler", "foO", "goO", "hash", "lIBRARY", "", "A",  "", "HaSh", "this-is-a-super-long-string-to-test-the-edge-case-of-a-string-that's-longer-than-the-max-capacity-defined-in-the-class-WordCount", "A", "a", "Another-Long-String-Except-The-First-Letter-Of-Each-Word-Is-Capitalized-Except-For-This-Word-Here-word", "Another-Long-String-Except-The-First-Letter-Of-Each-Word-Is-Capitalized-Except-For-This-Word-Here-word", "A", "a", "b", "a-bit-of-a-longer-word-but-not-that-long"};
     vector<string> wordList2 = {"sports", "mlb", "nfl", "nba", "nhl", "premier-league", "soccer", "BASKETBALL", "TeNnIs", "racket", "ball", "NBA", "GSW", "united-states", "los-angeles-lakers", "milwaukee", "SUNS", "memphis-grizzlies", "PLAYoffs", "offseason", "gsw", "bball", "a", "b", "c", "d", "e", "f", "g", "h", "b", "c"};
     vector<string> wordList3 = {"a", "b", "c"};
     vector<string> wordList4 = {"a", "b", "c", "a", "b", "c", "A", "B", "C"};
+
     //"foo", "GOO", "CS", "lAb", "computER-sCieNce", "relatively-long-string-but-not-that-long", "ucsb", "North-Hall", "library", "compiler", "hash", "lIBRARY", "", "A", "HaSh", "this-is-a-super-long-string-to-test-the-edge-case-of-a-string-that's-longer-than-the-max-capacity-defined-in-the-class-WordCount", "Another-Long-String-Except-The-First-Letter-Of-Each-Word-Is-Capitalized-Except-For-This-Word-Here-word", "b", "a-bit-of-a-longer-word-but-not-that-long"
     //"sports", "mlb", "nfl", "nba", "nhl", "premier-league", "soccer", "BASKETBALL", "TeNnIs", "racket", "ball", "GSW", "united-states", "los-angeles-lakers", "milwaukee", "SUNS", "memphis-grizzlies", "PLAYoffs", "offseason", "bball", "a", "b", "c", "d", "e", "f", "g", "h"
     //iterate thru the array/list of strings and then add them to the object - check the wordcount functions here
@@ -84,7 +90,7 @@ int main(){
         s = wordList4.at(i);
         w4.incrWordCount(s);
     }
-
+    w5.incrWordCount("--$$--");
     cout << endl;
 
     //test getTotalWords()
@@ -96,6 +102,8 @@ int main(){
 
     wordListSize = wordList2.size();
     ASSERT_EQUALS(wordListSize, w2.getTotalWords());
+
+    ASSERT_EQUALS(0, w5.getTotalWords());
 
     cout << endl;
 
